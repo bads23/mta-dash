@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {Route, Link} from 'react-router-dom'
-import ApiGet from '../../../config/axios'
-import URLS from '../../../config/settings'
+import Api from '../../../config/settings'
 import { FormatDate } from '../../../common/functions/formatter';
 import Edit from './right/edit'
 
@@ -10,7 +9,8 @@ const index = () => {
   const [users, setUsers] = useState([])
 
   const getUsers = () => {
-    ApiGet(`${URLS().USERS}`)
+    // ApiGet(`${URLS().USERS}`)
+    Api.users.get()
       .then(res => {
         setUsers(res.data)
       })
@@ -24,7 +24,7 @@ const index = () => {
     <>
 
       <div className="midsection_full">
-        <Route exact path='/dashboard/users' render={() => (
+        <Route exact path='/users' render={() => (
             <>
               <h2 className="playfair-lg">Users</h2>
 

@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react'
 // import { Link } from 'react-router-dom'
 import Input1, {Checkbox} from '../../../../common/inputs'
-import ApiGet, {ApiPut} from '../../../../config/axios'
-import URLS from '../../../../config/settings'
+import Api from '../../../../config/settings'
 
 const Edit = ({props}) => {
 
   const [user, setUser] = useState([])
 
   const getUser = (id) => {
-    ApiGet(`${URLS().USERS}${id}`)
+    // ApiGet(`${URLS().USERS}${id}`)
+    Api.users.get(id)
     .then(res => (
       // console.log(res.data), 
       setUser(res.data)
@@ -41,11 +41,10 @@ const Edit = ({props}) => {
     btn.innerText = 'Saving...'
     btn.disabled = 'disabled'
 
-    ApiPut(`${URLS().USERS}${props.match.params.id}/`,user)
+    // ApiPut(`${URLS().USERS}${props.match.params.id}/`,user)
+    Api.users.put(props.match.params.id, user)
     .then(res => {
-      // console.log(res.data)
       btn.innerText = 'Saved!'
-
       setTimeout(() => {
         btn.disabled = ''
         btn.innerText = 'Save'

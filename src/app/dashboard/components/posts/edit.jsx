@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Input, {Editor} from '../../../common/inputs'
-import ApiGet, { ApiPut, ApiPost } from '../../../config/axios'
-import URLS from '../../../config/settings'
+import Api from '../../../config/settings'
 import {Uploader} from '../../../common/inputs' 
 
 const Edit = ({props}) => {
@@ -36,20 +35,17 @@ const Edit = ({props}) => {
         btn.innerText = 'Saving...'
         btn.disabled = 'disabled'
 
-        ApiPut(`${URLS().NEWS}${props.match.params.id}/`, post)
+        Api.news.put(props.match.params.id)
         .then(res => {
-            // console.log(res.data)
-
             if (cover !== ''){
-
                 var payload = new FormData()
                 payload.append('category', 'posts')
                 payload.append('post_id', props.match.params.id)
                 payload.append('image', image)
 
-                ApiPost(`${URLS().IMAGES}`, payload)
+                Api.images.post(payload)
                     .then(res => {
-                    btn.innerText = "Saved!"
+                        btn.innerText = "Saved!"
                     })
                     .catch(error => {
                     // btn.innerText = "Unable to upload! Try again!"
@@ -68,10 +64,11 @@ const Edit = ({props}) => {
     }
 
     const getItem = (id) => {
-        ApiGet(`${URLS().NEWS}${id}/`)
+        // ApiGet(`${URLS().NEWS}${id}/`)
+        Api.news.get(`?id=${id}/`)
         .then(res =>{
             setPost(res.data)
-            setCover(`${URLS().IMAGES}${res.data.Cover_Image}`)
+            setCover(`${Api.images.baseUrl}${res.data.Cover_Image}`)
         })
     }
 

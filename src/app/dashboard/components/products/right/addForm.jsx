@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Input, { Select, Textarea } from '../../../../common/inputs/index'
-import ApiGet, { ApiPost } from '../../../../config/axios'
-import URLS from '../../../../config/settings'
+import Api from '../../../../config/settings'
 // import { ShowNotify } from '../../../../common/popups'
 
 
@@ -12,7 +11,8 @@ const AddForm = ({ props }) => {
   const [product, setProduct] = useState({})
 
   const getCategories = () => {
-    ApiGet(`${URLS().CATEGORIES}`)
+    // ApiGet(`${URLS().CATEGORIES}`)
+    Api.categories.get()
       .then(res => {
         setCategories(res.data)
       })
@@ -20,12 +20,14 @@ const AddForm = ({ props }) => {
 
   const getSubCategories = (id) => {
     id ? (
-      ApiGet(`${URLS().SUBCATEGORIES}?category=${id}`)
+      // ApiGet(`${URLS().SUBCATEGORIES}?category=${id}`)
+      Api.subcategories.get(`?category=${id}`)
         .then(res => {
           setSubCategories(res.data)
         })
     ) : (
-        ApiGet(`${URLS().SUBCATEGORIES}`)
+        // ApiGet(`${URLS().SUBCATEGORIES}`)
+        Api.subcategories.get()
           .then(res => {
             setSubCategories(res.data)
           })
@@ -34,12 +36,14 @@ const AddForm = ({ props }) => {
 
   const getProductclasses = (id) => {
     id ? (
-      ApiGet(`${URLS().PRODUCTCLASS}?subcategory=${id}`)
+      // ApiGet(`${URLS().PRODUCTCLASS}?subcategory=${id}`)
+      Api.productclass.get(`?subcategory=${id}`)
         .then(res => {
           setProductClasses(res.data)
         })
     ) : (
-        ApiGet(`${URLS().PRODUCTCLASS}`)
+        // ApiGet(`${URLS().PRODUCTCLASS}`)
+        Api.productclass.get()
           .then(res => {
             setProductClasses(res.data)
           })
@@ -106,7 +110,8 @@ const AddForm = ({ props }) => {
     btn.innerHTML = "Saving..."
 
     console.log(product)
-    ApiPost(`${URLS().CATALOG}`, { ...product })
+    // ApiPost(`${URLS().CATALOG}`, { ...product })
+    Api.catalog.post(product)
       .then(res => {
         btn.innerText = "Saved!"
         // ShowNotify(`<b>${res.data.name}</b> was added successfully!`)

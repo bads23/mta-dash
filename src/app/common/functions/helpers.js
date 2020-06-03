@@ -22,4 +22,4 @@ export const shuffle = (array) => {
 
 export function getRndInteger(max) {
     return Math.floor(Math.random() * (max - 1) ) + 1;
-  }
+}

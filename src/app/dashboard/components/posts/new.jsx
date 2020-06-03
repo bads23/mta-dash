@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 
 import Input, {Editor} from '../../../common/inputs'
-import { ApiPost } from '../../../config/axios'
-import URLS from '../../../config/settings'
+import Api from '../../../config/settings'
 
 const New = () => {
     
@@ -37,7 +36,7 @@ const New = () => {
         e.preventDefault()
         e.stopPropagation()
 
-        ApiPost(`${URLS().NEWS}`, post)
+        Api.news.post()
         .then(res => {
             console.log(res.data)
         })

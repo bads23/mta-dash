@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react'
 // import {Editor, EditorState} from 'draft-js'
-
-import ApiGet, {ApiPost} from '../../../../config/axios'
-import URLS from '../../../../config/settings'
+import Api from '../../../../config/settings'
 
 import Input1, {Editor, Select} from '../../../../common/inputs'
 
@@ -13,7 +11,8 @@ const editClient = ({props}) => {
     const [cats, setCats] = useState([])
 
     const getCategories = () => {
-      ApiGet(`${URLS().CLIENTSCATS}`)
+    //   ApiGet(`${URLS().CLIENTSCATS}`)
+    Api.clientscats.get()
         .then(res => {
           setCats(res.data)
         })
@@ -78,7 +77,8 @@ const editClient = ({props}) => {
         const subBtn = document.getElementById('submitBtn')
         subBtn.innerText = 'Saving...'
 
-        ApiPost(`${URLS().CLIENTS}`, {...editor})
+        // ApiPost(`${URLS().CLIENTS}`, {...editor})
+        Api.clients.post(editor)
         .then(res =>{
             subBtn.innerText = 'Saved!'
             setTimeout(() => {

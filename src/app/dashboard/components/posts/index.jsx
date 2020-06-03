@@ -7,9 +7,9 @@ import Edit from './edit'
 const Index = () => {
     return(
         <>
-            <Route exact path="/dashboard/posts/" render={(props) => <PostList {...props}/>} />
-            <Route exact path="/dashboard/posts/new/" component={New} />
-            <Route exact path="/dashboard/posts/edit/:id" render={(props) => <Edit props={props} /> } />
+            <Route exact path="/posts/" render={(props) => <PostList {...props}/>} />
+            <Route exact path="/posts/new/" component={New} />
+            <Route exact path="/posts/edit/:id" render={(props) => <Edit props={props} /> } />
         </>
     )
 }

@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import Input, {Editor} from '../../../common/inputs'
-import {ApiPost} from '../../../config/axios'
-import URLS from '../../../config/settings'
+import Api from '../../../config/settings'
 import {Uploader} from '../../../common/inputs' 
 
 const New = ({props}) => {
@@ -42,17 +41,17 @@ const New = ({props}) => {
         btn.innerText = 'Saving...'
         btn.disabled = 'disabled'
 
-        ApiPost(`${URLS().EVENTS}`, post)
+        // ApiPost(`${URLS().EVENTS}`, post)
+        Api.events.post(post)
         .then(res => {
-            // console.log(res.data)
-
             if (cover !== ''){
                 var payload = new FormData()
                 payload.append('event_id', props.match.params.id)
                 payload.append('image', image)
                 payload.append('category', 'events')
 
-                ApiPost(`${URLS().IMAGES}`, payload)
+                // ApiPost(`${URLS().IMAGES}`, payload)
+                Api.images.post(payload)
                     .then(res => {
                     btn.innerText = "Saved!"
                     })

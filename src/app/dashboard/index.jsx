@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './sass/main.scss'
-import { Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Sidebar from './components/sidebar'
 
 import Stats from './components/stats'
@@ -15,16 +15,20 @@ class Dashboard extends Component {
   render() {
     return (
       <>
-        <Sidebar props={this.props} />
-
+        <Router>
+          <Sidebar />
+        </Router>
+        
         <div className="middle">
-          <Route exact path="/dashboard/" component={Stats} />
-          <Route path="/dashboard/products/" component={Products} />
-          <Route path="/dashboard/orders/" component={Orders} />
-          <Route path="/dashboard/users/" component={Users} />
-          <Route path="/dashboard/clients/" component={Clients} />
-          <Route path="/dashboard/posts/" component={Posts} />
-          <Route path="/dashboard/events/" component={Events} />
+          <Router>
+            <Route exact path="/" component={Stats} />
+            <Route path="/products/" component={Products} />
+            <Route path="/orders/" component={Orders} />
+            <Route path="/users/" component={Users} />
+            <Route path="/clients/" component={Clients} />
+            <Route path="/posts/" component={Posts} />
+            <Route path="/events/" component={Events} />
+          </Router>
         </div>
       </>
     )

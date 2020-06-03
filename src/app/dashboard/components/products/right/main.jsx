@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import ApiGet from '../../../../config/axios'
-import URLS from '../../../../config/settings'
+import Api from '../../../../config/settings'
 import Formart from '../../../../common/functions/formatter'
 
 const Item = ({ props }) => {
   
   return (
-    <a href={`/dashboard/products/edit/` + props.id}>
+    <a href={`/products/edit/` + props.id}>
       <div className="item">
         <div className="pr-image">
           {
             props.images.length >= 1 ? (
-              <img src={`${URLS().IMAGES}/${props.images[0].path}`} alt=""/>
+              <img src={`${Api.images.imgUrl}/${props.images[0].path}`} alt=""/>
             ) : (
               ''
             )
@@ -31,7 +30,7 @@ const index = () => {
   const [products, setProducts] = useState([]);
 
   const getItems = () => {
-    ApiGet(`${URLS().CATALOG}`)
+    Api.catalog.get()
       .then(res => {
         setProducts(res.data)
       })
@@ -47,7 +46,7 @@ const index = () => {
         <div className="fl-btw">
           <h2 className="playfair-lg"> Products </h2>
           <div>
-            <Link to="/dashboard/products/new">
+            <Link to="/products/new">
               <span className="lato-m b"><i className="fas fa-plus "></i> New Product</span>
             </Link>
           </div>

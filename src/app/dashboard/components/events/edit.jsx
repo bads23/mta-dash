@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Input, {Editor} from '../../../common/inputs'
-import ApiGet, { ApiPut, ApiPost } from '../../../config/axios'
-import URLS from '../../../config/settings'
+import Api from '../../../config/settings'
 import {Uploader} from '../../../common/inputs' 
 
 const Edit = ({props}) => {
@@ -42,17 +41,17 @@ const Edit = ({props}) => {
         btn.innerText = 'Saving...'
         btn.disabled = 'disabled'
 
-        ApiPut(`${URLS().EVENTS}${props.match.params.id}/`, post)
+        // ApiPut(`${URLS().EVENTS}${props.match.params.id}/`, post)
+        Api.events.put(props.match.params.id, post)
         .then(res => {
-            // console.log(res.data)
-
             if (cover !== ''){
                 var payload = new FormData()
                 payload.append('event_id', props.match.params.id)
                 payload.append('image', image)
                 payload.append('category', 'events')
 
-                ApiPost(`${URLS().IMAGES}`, payload)
+                // ApiPost(`${URLS().IMAGES}`, payload)
+                Api.images.post(payload)
                     .then(res => {
                     btn.innerText = "Saved!"
                     })
@@ -73,10 +72,11 @@ const Edit = ({props}) => {
     }
 
     const getItem = (id) => {
-        ApiGet(`${URLS().EVENTS}${id}/`)
+        // ApiGet(`${URLS().EVENTS}${id}/`)
+        Api.events.get(id)
         .then(res =>{
             setPost(res.data)
-            setCover(`${URLS().IMAGES}${res.data.cover_image}`)
+            setCover(`${Api.images.baseUrl}${res.data.cover_image}`)
         })
     }
 

@@ -10,9 +10,9 @@ const index = () => {
   
   return (
     <>
-      <Route exact path="/dashboard/products/" render={(props) => <Main {...props} />} />
-      <Route exact path="/dashboard/products/new" render={() => <AddForm/> } />
-      <Route exact path="/dashboard/products/edit/:id" render={(props) => <EditForm props={props} />} />
+      <Route exact path="/products/" render={(props) => <Main {...props} />} />
+      <Route exact path="/products/new" render={() => <AddForm/> } />
+      <Route exact path="/products/edit/:id" render={(props) => <EditForm props={props} />} />
     </>
   )
 }

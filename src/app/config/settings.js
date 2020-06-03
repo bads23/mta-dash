@@ -1,38 +1,44 @@
-const URLS = () => {
-  const BASE_URL = 'https://b23.pythonanywhere.com/'
-  const IMG_URL = 'https://media.motiontalentafrica.co.ke/'
-  // const IMG_URL = 'http://mta.lan/'
-  // const BASE_URL = 'http://localhost:8000/'
+import Call, {Img} from './api'
+
+const Api = () => {
+  
+  var setUrl = (path) => { 
+    return new Call(path)
+  }
+
+  var setImgUrl = (path) =>{
+    return new Img(path)
+  }
 
   return (
     {
-      "SERVER_URL": BASE_URL,
-      "AUTH": BASE_URL + 'api/token/',
-      "REFRESH": BASE_URL + 'api/token/refresh/',
-      "CATEGORIES": BASE_URL + 'categories/',
-      "SUBCATEGORIES": BASE_URL + 'subcategories/',
-      "PRODUCTCLASS": BASE_URL + 'productclass/',
-      "CATALOG": BASE_URL + 'catalog/',
-      "PAYMENTS": BASE_URL + 'payments/payments/',
-      "NOTIFICATIONS": BASE_URL + 'payments/notifications/',
-      "ME": BASE_URL + 'users/usersList/me',
-      "USERS": BASE_URL + 'users/usersList/',
-      "USERDETAILS": BASE_URL + 'users/userDetails/',
-      "ORDERS": BASE_URL + 'orders/list/',
-      "ORDERITEMS": BASE_URL + 'orders/orderItems/',
-      "ORDERSTATS": BASE_URL + 'orders/stats/',
-      "ITEMSSTATS": BASE_URL + 'orders/itemssold/',
-      "CLIENTS": BASE_URL + 'clients/clients/',
-      "CLIENTSCATS": BASE_URL + 'clients/clientsCategory',
-      "POSTAS": BASE_URL + 'orders/postas/',
-      "IMAGES_URL": BASE_URL + 'images/',
-      "IMAGES": IMG_URL,
-      "NEWS": BASE_URL + 'posts/news/',
-      "VISITORS": BASE_URL + 'users/visitors/',
-      "VISITORSTATS": BASE_URL + 'users/visitorStats/',
-      "EVENTS": BASE_URL + 'posts/events/'
+      server_url: setUrl(),
+      auth: setUrl('api/token/') ,
+      refresh: setUrl('api/token/refresh/') ,
+      categories: setUrl('categories/') ,
+      subcategories: setUrl('subcategories/') ,
+      productclass: setUrl('productclass/') ,
+      catalog: setUrl('catalog/'),
+      payments: setUrl('payments/payments/'),
+      notifications: setUrl('payments/notifications/'),
+      me: setUrl('users/usersList/me/') ,
+      users: setUrl('users/usersList/') ,
+      userdetails: setUrl('users/userDetails/') ,
+      orders: setUrl('orders/list/'),
+      orderitems: setUrl('orders/orderItems/') ,
+      orderstats: setUrl('orders/stats/') ,
+      itemsstats: setUrl('orders/itemssold/'),
+      clients: setUrl('clients/clients/') ,
+      clientscats: setUrl('clients/clientsCategory'),
+      postas: setUrl('orders/postas/'),
+      images_url: setUrl('images/') ,
+      images: setImgUrl(''),
+      news: setUrl('posts/news/') ,
+      visitors: setUrl('users/visitors/') ,
+      visitorstats: setUrl('users/visitorStats/'),
+      events: setUrl('posts/events/')
     }
   )
 }
 
-export default URLS
+export default Api()

@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import ApiGet from '../../../config/axios'
-import URLS from '../../../config/settings'
+import Api from '../../../config/settings'
 import {Link} from 'react-router-dom'
 import { FormatDate } from '../../../common/functions/formatter'
 
@@ -20,7 +19,7 @@ const EventDiv = ({events}) =>{
                     events.map(event =>(
                         <tr>
                             <td>{event.id}</td>
-                            <td><a href={`/dashboard/events/edit/${event.id}/`}>{event.Title}</a></td>
+                            <td><a href={`/events/edit/${event.id}/`}>{event.Title}</a></td>
                             <td>{ FormatDate(event.date_added).date }</td>
                             <td></td>
                         </tr>
@@ -38,7 +37,8 @@ const Events = () =>{
     const [events, setEvents] = useState([])
 
     const getEvents = () => {
-        ApiGet(`${URLS().EVENTS}`)
+        // ApiGet(`${URLS().EVENTS}`)
+        Api.events.get()
         .then(res => {
             var arr = [...res.data].reverse()
             setEvents(arr)

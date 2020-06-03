@@ -1,20 +1,19 @@
 import React, {useState, useEffect} from 'react'
 import Logo from '../../../common/assets/svg/MTA.svg'
 import Notify from '../../../common/popups'
+import Logout from '../../../auth/logout'
 
-const index = ({ props }) => {
+const MenuItem = ({name, link}) =>{
+  return(
+    <>    
+      <a href={link}>
+        <li>{name}</li>
+      </a>
+    </>
+  )
+}
 
-  const [menu, setMenu] = useState('')
-
-  const activeMenu = () => {
-    var path = props.location.pathname
-    path = path.split("/");
-    setMenu({menu: path[2]})
-  }
-
-  useEffect(() =>{
-    activeMenu()
-  },[])
+const index = () => {
 
   return (
     <>
@@ -35,27 +34,18 @@ const index = ({ props }) => {
 
       <nav className="nav">
         <ul>
-          <a href="/dashboard/">
-            <li className={menu.menu === '' ? `active`: ``} id="dashboard-link" onClick={activeMenu}>Dashboard</li>
+          <MenuItem name="Dashboard" link="/" />
+          <MenuItem name="Products" link="/products" />
+          <MenuItem name="Orders" link="/orders/" />
+          <MenuItem name="Users" link="/users/" />
+          <MenuItem name="Clients" link="/clients/" />
+          <MenuItem name="News" link="/posts/" />
+          <MenuItem name="Events" link="/events/" />
+
+          <a href='' onClick={Logout}>
+            <li>Logout</li>
           </a>
-          <a href="/dashboard/products/">
-            <li className={menu.menu === 'products' ? `active`: ``} id="products-link" onClick={activeMenu}>Products</li>
-          </a>
-          <a href="/dashboard/orders/">
-            <li className={menu.menu === 'orders' ? `active`: ``} id="orders-link" onClick={activeMenu}>Orders</li>
-          </a>
-          <a href="/dashboard/users/">
-            <li className={menu.menu === 'users' ? `active`: ``} id="users-link" onClick={activeMenu}>Users</li>
-          </a>
-          <a href="/dashboard/clients/">
-            <li className={menu.menu === 'clients' ? `active`: ``} id="users-link" onClick={activeMenu}>Clients</li>
-          </a>
-          <a href="/dashboard/posts/">
-            <li className={menu.menu === 'posts' ? `active`: ``} id="users-link" onClick={activeMenu}>Posts</li>
-          </a>
-          <a href="/dashboard/events/">
-            <li className={menu.menu === 'events' ? `active`: ``} id="users-link" onClick={activeMenu}>Events</li>
-          </a>
+
         </ul>
       </nav>
       

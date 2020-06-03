@@ -1,9 +1,7 @@
 import React, { useState, useContext } from 'react'
 import Input1 from '../../common/inputs'
-import URLS from '../../config/settings'
-import ApiGet, { ApiPost } from '../../config/axios'
+import Api from '../../config/settings'
 import { UserContext } from '../context';
-// import { hostname } from 'os';
 
 const LoginForm = () => {
   const context = useContext(UserContext)
@@ -40,18 +38,13 @@ const LoginForm = () => {
     btn.innerText = `${msg}`
   }
 
-  const updateContext = (user) => {
-    context.setUser(user)
-    localStorage.setItem("user", JSON.stringify(user))
-  }
-
   const sendEmail = (user) => {
     var payload = {
       email: "NEW USER",
       data: {...user}
     }
 
-    ApiPost(`${URLS().IMAGES}`, payload)
+    Api.images.post(payload)
       .then(res => {
         console.log(res)
       })
@@ -61,6 +54,18 @@ const LoginForm = () => {
   }
 
 
+  const updateContext = () => {
+    var userUpdated = false
+    Api.me.get()
+    .then(res => {
+      context.setUser(res.data)
+      localStorage.setItem("user", JSON.stringify(res.data))
+      userUpdated = true
+    })
+    return userUpdated
+  }
+
+  
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -68,30 +73,17 @@ const LoginForm = () => {
       errorMsg("Email and Password are required!")
       console.log("try again")
     } else {
-
       disableBtn("logging in ...")
-
       var payload = {
         "email": email,
         "password": password
       }
 
-      ApiPost(`${URLS().AUTH}`, payload)
+      Api.auth.post(payload)
         .then(res => {
           errorMsg("Login Successful!")
           localStorage.setItem("tokens", JSON.stringify(res.data))
-          console.log(res.data.access)
-          // get user credentials
-          ApiGet(`${URLS().ME}`)
-            .then(res => {
-              // sendEmail(res.data)
-              window.history.back()
-              updateContext(res.data)
-            })
-            .catch(error => {
-
-            })
-
+          updateContext()
         })
         .catch(error => {
           if (!error.response) {

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Input, { Select, Textarea, Editor } from '../../../../common/inputs/index'
-import ApiGet, { ApiPut, ApiPost, ApiDelete } from '../../../../config/axios'
-import URLS from '../../../../config/settings'
-// import { NOTIMP } from 'dns';
+import Api from '../../../../config/settings'
 import { ShowNotify } from '../../../../common/popups'
 
 const EditForm = ({ props }) => {
@@ -13,7 +11,7 @@ const EditForm = ({ props }) => {
   const [image, setImage] = useState([])
 
   const getCategories = () => {
-    ApiGet(`${URLS().CATEGORIES}`)
+    Api.categories.get()
       .then(res => {
         setCategories(res.data)
       })
@@ -21,12 +19,14 @@ const EditForm = ({ props }) => {
 
   const getSubCategories = (id) => {
     id ? (
-      ApiGet(`${URLS().SUBCATEGORIES}?category=${id}`)
+      // ApiGet(`${URLS().SUBCATEGORIES}?category=${id}`)
+      Api.subcategories.get(`?category=${id}`)
         .then(res => {
           setSubCategories(res.data)
         })
     ) : (
-        ApiGet(`${URLS().SUBCATEGORIES}`)
+        // ApiGet(`${URLS().SUBCATEGORIES}`)
+        Api.subcategories.get()
           .then(res => {
             setSubCategories(res.data)
           })
@@ -35,12 +35,14 @@ const EditForm = ({ props }) => {
 
   const getProductclasses = (id) => {
     id ? (
-      ApiGet(`${URLS().PRODUCTCLASS}?subcategory=${id}`)
+      // ApiGet(`${URLS().PRODUCTCLASS}?subcategory=${id}`)
+      Api.productclass.get(`?subcategory=${id}`)
         .then(res => {
           setProductClasses(res.data)
         })
     ) : (
-        ApiGet(`${URLS().PRODUCTCLASS}`)
+        // ApiGet(`${URLS().PRODUCTCLASS}`)
+        Api.productclass.get()
           .then(res => {
             setProductClasses(res.data)
           })
@@ -48,7 +50,8 @@ const EditForm = ({ props }) => {
   }
 
   const getProduct = (id) => {
-    ApiGet(`${URLS().CATALOG}${id}/`)
+    // ApiGet(`${URLS().CATALOG}${id}/`)
+    Api.catalog.get(id+'/')
       .then(res => (
         setProduct(res.data)
       ))
@@ -146,7 +149,8 @@ const EditForm = ({ props }) => {
     btn.innerText = 'Saving...'
     btn.disabled = 'disabled'
 
-    ApiPut(`${URLS().CATALOG}${props.match.params.id}/`, { ...product })
+    // ApiPut(`${URLS().CATALOG}${props.match.params.id}/`, { ...product })
+    Api.catalog.put(props.match.params.id, product)
       .then(res => {
         setProduct(res.data)
 
@@ -156,7 +160,8 @@ const EditForm = ({ props }) => {
           payload.append('image', image[0])
           payload.append('category', 'products')
 
-          ApiPost(`${URLS().IMAGES}`, payload)
+          // ApiPost(`${URLS().IMAGES}`, payload)
+          Api.images.post(payload)
             .then(res => {
               btn.innerText = "Saved!"
             })
@@ -164,15 +169,15 @@ const EditForm = ({ props }) => {
               // btn.innerText = "Unable to upload! Try again!"
               btn.disabled = ''
               console.log(error)
-              setTimeout(() => {
-                window.location.reload()
-            }, 2000)
+            //   setTimeout(() => {
+            //     window.location.reload()
+            // }, 2000)
             })
         } else {
           btn.innerText = "Saved!"
-          setTimeout(() => {
-            window.location.reload()
-          }, 2000)
+          // setTimeout(() => {
+          //   window.location.reload()
+          // }, 2000)
         }
 
       })
@@ -181,8 +186,7 @@ const EditForm = ({ props }) => {
 
   const thanosSnap = (e) => {
     e.preventDefault()
-
-    ApiDelete(`${URLS().CATALOG}${props.match.params.id}`)
+    Api.catalog.delete(props.match.params.id)
       .then(res => {
         console.log(res.data)
         ShowNotify(`Item has been deleted!`)
@@ -193,7 +197,8 @@ const EditForm = ({ props }) => {
   }
 
   const deleteImage = (id) => {
-    ApiDelete(`${URLS().IMAGES_URL}${id}/`)
+    // ApiDelete(`${URLS().IMAGES_URL}${id}/`)
+    Api.images_url.delete(id)
     .then(res =>{
       ShowNotify("Image Deleted!")
       getProduct(props.match.params.id)
@@ -232,7 +237,7 @@ const EditForm = ({ props }) => {
                   (
                     product.images.map(img => (
                         <div className="imgContainer isImg">
-                          <img src={`${URLS().IMAGES}`+img.path} alt="" />
+                          <img src={`${Api.images.imgUrl}`+img.path} alt="" />
                           <span className="delBtn" onClick={() => {deleteImage(img.id)}}><i className="fas fa-trash-alt"></i></span>
                         </div>
                       ))

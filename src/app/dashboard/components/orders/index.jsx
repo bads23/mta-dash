@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import ApiGet from '../../../config/axios'
-import URLS from '../../../config/settings'
+import Api from '../../../config/settings'
 import Formart, { FormatDate } from '../../../common/functions/formatter'
 import { ShowOption } from '../../../common/popups'
 
@@ -9,7 +8,8 @@ const index = () => {
   const [orders, setOrders] = useState([])
 
   const getOrders = () => {
-    ApiGet(`${URLS().ORDERS}?ordering=-id`)
+    // ApiGet(`${URLS().ORDERS}?ordering=-id`)
+    Api.orders.get(`?ordering=-id`)
       .then(res => {
         setOrders(res.data)
       })

@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import ApiGet from '../../../config/axios'
-import URLS from '../../../config/settings'
+import Api from '../../../config/settings'
 import { LineChart, Line, XAxis,YAxis, Tooltip, CartesianGrid, Label } from 'recharts';
 import formatNumber from '../../../common/functions/formatter'
 
@@ -13,21 +12,24 @@ const index = () => {
 
 
   const getOrderStats = () => {
-    ApiGet(`${URLS().ORDERSTATS}?days=7`)
+    // ApiGet(`${URLS().ORDERSTATS}?days=7`)
+    Api.orderstats.get('?days=7')
     .then(res =>(
       setOrders(res.data)
     ))
   }
 
   const getItemStats = () =>{
-    ApiGet(`${URLS().ITEMSSTATS}`)
+    // ApiGet(`${URLS().ITEMSSTATS}`)
+    Api.itemsstats.get()
     .then(res =>(
       setItemStats(res.data)
     ))
   }
 
   const getVisitorStats = () => {
-    ApiGet(`${URLS().VISITORSTATS}`)
+    // ApiGet(`${URLS().VISITORSTATS}`)
+    Api.visitorstats.get()
     .then(res =>(
       setVisitorStats(res.data)
     ))

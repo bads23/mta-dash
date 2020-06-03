@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import ApiGet from '../../../config/axios'
-import URLS from '../../../config/settings'
+import Api from '../../../config/settings'
 import { FormatDate } from '../../../common/functions/formatter'
 import {Link} from 'react-router-dom'
 
@@ -20,7 +19,7 @@ const PostsTable = ({news}) => {
                     news.map(item =>(
                         <tr>
                             <td>{item.id}</td>
-                            <td><a href={`/dashboard/posts/edit/${item.id}/`}>{item.Title}</a></td>
+                            <td><a href={`/posts/edit/${item.id}/`}>{item.Title}</a></td>
                             <td>{ FormatDate(item.date_added).date }</td>
                             <td>{item.views}</td>
                         </tr>
@@ -39,7 +38,8 @@ const Posts = () =>{
     const [news, setNews] = useState([])
 
     const getNews = () => {
-        ApiGet(`${URLS().NEWS}`)
+        // ApiGet(`${URLS().NEWS}`)
+        Api.news.get()
         .then(res => {
             var arr = [...res.data].reverse()
             setNews(arr)

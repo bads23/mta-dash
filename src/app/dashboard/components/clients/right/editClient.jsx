@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import ApiGet, {ApiPut,ApiPost} from '../../../../config/axios'
-import URLS from '../../../../config/settings'
+import Api from '../../../../config/settings'
 
 import Input1, {Editor, Select, Uploader} from '../../../../common/inputs'
 
@@ -11,15 +10,17 @@ const editClient = ({props}) => {
     const [image, setImage] = useState('')
 
     const getClient = (id) =>{
-        ApiGet(`${URLS().CLIENTS}${id}/`)
+        // ApiGet(`${URLS().CLIENTS}${id}/`)
+        Api.clients.get(id)
         .then(res => {
             setEditor(res.data)
-            setAvatar(`${URLS().IMAGES}${res.data.profile_photo}`)
+            setAvatar(`${Api.images.baseUrl}${res.data.profile_photo}`)
         })
     }
 
     const getCategories = () =>{
-        ApiGet(`${URLS().CLIENTSCATS}/`)
+        // ApiGet(`${URLS().CLIENTSCATS}/`)
+        Api.clientscats.get()
         .then(res => {
             setCats(res.data)
         })
@@ -97,7 +98,8 @@ const editClient = ({props}) => {
         payload.append('category', 'clients')
         payload.append('image', image)
 
-        ApiPost(`${URLS().IMAGES}`, payload)
+        // ApiPost(`${URLS().IMAGES}`, payload)
+        Api.images.post(payload)
         .then(res => {
             console.log('uploaded')
         })
@@ -110,7 +112,8 @@ const editClient = ({props}) => {
         const subBtn = document.getElementById('submitBtn')
         subBtn.innerText = 'Saving...'
         
-        ApiPut(`${URLS().CLIENTS}${props.match.params.id}/`, {...editor})
+        // ApiPut(`${URLS().CLIENTS}${props.match.params.id}/`, {...editor})
+        Api.clients.put(props.match.params.id, editor)
         .then(res =>{          
             subBtn.innerText = 'Saved!'
             console.log(res.data)
