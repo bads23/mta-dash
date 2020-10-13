@@ -38,22 +38,6 @@ const LoginForm = () => {
     btn.innerText = `${msg}`
   }
 
-  const sendEmail = (user) => {
-    var payload = {
-      email: "NEW USER",
-      data: {...user}
-    }
-
-    Api.images.post(payload)
-      .then(res => {
-        console.log(res)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
-
-
   const updateContext = () => {
     var userUpdated = false
     Api.me.get()

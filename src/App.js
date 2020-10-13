@@ -1,8 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from './app/auth/context'
-import Dashboard from './app/dashboard/index'
+import Dashboard from './app/index'
 import Login from './app/auth/login'
-import {Loading2} from './app/common/loader'
 
 const App  = () => {
 
