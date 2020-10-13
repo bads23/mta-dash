@@ -41,6 +41,8 @@ const index = () => {
           <MenuItem name="Clients" link="/clients/" />
           <MenuItem name="News" link="/posts/" />
           <MenuItem name="Events" link="/events/" />
+          {/* <MenuItem name="Homepage" link="/homepage/" /> */}
+          <MenuItem name="About page" link="/about/" />
 
           <a href='' onClick={Logout}>
             <li>Logout</li>

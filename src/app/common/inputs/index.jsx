@@ -46,7 +46,7 @@ export const Textarea = (props) => {
     <>
       <div className="input1">
         <label htmlFor="">{props.label}:</label>
-        <textarea value={props.value} onChange={props.onChange} placeholder={props.ph}></textarea>
+        <textarea value={props.value} id={props.id} onChange={props.onChange} placeholder={props.ph}></textarea>
       </div>
     </>
   )

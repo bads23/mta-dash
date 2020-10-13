@@ -65,6 +65,18 @@
   border-color: black;
 }
 
+.btn-red{
+  @extend .btn ;
+  border-color: red;
+  color: red;
+  &::after{
+    background-color:red;
+  }
+  &::before{
+    background-color:red;
+  }
+}
+
 .btn-gold{
   @extend .btn ;
   border-color: $color-gold;

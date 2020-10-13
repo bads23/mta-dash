@@ -27,6 +27,7 @@ const Api = () => {
       orders: setUrl('orders/list/'),
       orderitems: setUrl('orders/orderItems/') ,
       orderstats: setUrl('orders/stats/') ,
+      orderstatus: setUrl('orders/status/') ,
       itemsstats: setUrl('orders/itemssold/'),
       clients: setUrl('clients/clients/') ,
       clientscats: setUrl('clients/clientsCategory'),
@@ -36,7 +37,8 @@ const Api = () => {
       news: setUrl('posts/news/') ,
       visitors: setUrl('users/visitors/') ,
       visitorstats: setUrl('users/visitorStats/'),
-      events: setUrl('posts/events/')
+      events: setUrl('posts/events/'),
+      about: setUrl('clients/about/')
     }
   )
 }

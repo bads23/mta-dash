@@ -5,9 +5,8 @@ import './index.scss';
 import App from './App';
 
 ReactDOM.render(
-    
     <UserProvider>
         <App />
     </UserProvider>,
 
-    document.getElementById('root'));
+document.getElementById('root'));

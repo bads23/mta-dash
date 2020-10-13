@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom'
 import Api from '../../../../config/settings'
 import Formart from '../../../../common/functions/formatter'
 
-const Item = ({ props }) => {
+export const Item = ({ props }) => {
   
   return (
     <a href={`/products/edit/` + props.id}>
       <div className="item">
         <div className="pr-image">
           {
-            props.images.length >= 1 ? (
+            props.images ? (
               <img src={`${Api.images.imgUrl}/${props.images[0].path}`} alt=""/>
             ) : (
               ''

@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 class Call{
-
     baseUrl = 'https://b23.pythonanywhere.com/'
     imgUrl = 'https://media.motiontalentafrica.co.ke/'
     
@@ -19,7 +18,6 @@ class Call{
         } else {
             headers = {}
         }
-        console.log(headers)
         return headers
     } 
 
