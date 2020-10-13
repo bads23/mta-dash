@@ -8,7 +8,7 @@ const Index = () => {
     return(
         <>
             <Route exact path="/posts/" render={(props) => <PostList {...props}/>} />
-            <Route exact path="/posts/new/" component={New} />
+            <Route exact path="/posts/new/" render={(props) => <New {...props} />} />
             <Route exact path="/posts/edit/:id" render={(props) => <Edit props={props} /> } />
         </>
     )

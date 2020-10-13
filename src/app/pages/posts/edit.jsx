@@ -48,7 +48,6 @@ const Edit = ({props}) => {
                         btn.innerText = "Saved!"
                     })
                     .catch(error => {
-                    // btn.innerText = "Unable to upload! Try again!"
                     btn.disabled = ''
                     console.log(error)
                     setTimeout(() => {
