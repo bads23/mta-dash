@@ -12,7 +12,6 @@ import Posts from './pages/posts'
 import Events from './pages/events'
 import About from './pages/about'
 
-
 class Dashboard extends Component {
   render() {
     return (
