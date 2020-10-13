@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './sass/main.scss'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Sidebar from './pages/sidebar'
+import Sidebar from './common/sidebar'
 
 import Stats from './pages/stats'
 import Products from './pages/products'
