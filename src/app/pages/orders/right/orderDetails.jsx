@@ -85,8 +85,8 @@ const OrderDetails = (props) => {
         order ? (
           <>
             <div className="mg-v-20">
-              <span className="order-text lato-xlg">Order: {order.name} </span>
-              <span className="order-text lato-m"> {FormatDate(order.date_added).date} | {order.status_name} | Ksh {FormatNumber(mkTotal(order))} </span>
+              <span className="order-text lato-xlg">{order.name} </span>
+              <span className="order-text lato-m"> {FormatDate(order.date_added).date} | {order.status_name} | Ksh {FormatNumber(mkTotal(order))} | {order.posta ? ` ${order.posta}` : ''} </span>
               <span className="lato-m">by {order.user_fname} {order.user_lname} </span>
             </div>
 

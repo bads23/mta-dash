@@ -9,7 +9,7 @@ const TableTr = ({order}) =>{
     <>
       <tr>
         <td>{FormatDate(order.date_added).date}</td>
-        <td>{order.name}</td>
+        <td>{order.name} {order.posta ? ` (${order.posta})` : ''}</td>
         <td>{order.user_email}</td>
         <td>{order.order_items.map(item => (
           <li style={{listStyleType:'none'}}>
@@ -51,7 +51,7 @@ const Table = () => {
                 <tbody>
                   <tr>
                     <th>Date</th>
-                    <th>Order No</th>
+                    <th>Order No (Posta)</th>
                     <th>User</th>
                     <th>Item(Qty)</th>
                     <th>Status</th>

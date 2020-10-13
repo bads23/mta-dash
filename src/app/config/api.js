@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 class Call{
-    baseUrl = 'https://b23.pythonanywhere.com/'
-    imgUrl = 'https://media.motiontalentafrica.co.ke/'
+    baseUrl = process.env.REACT_APP_API_URL
+    imgUrl = process.env.REACT_APP_MEDIA_URL
     
     constructor(endpoint){
         this.endpoint = `${this.baseUrl}${endpoint}`
