@@ -58,7 +58,7 @@ class Call{
 
 export class Img extends Call {
 
-    baseUrl = 'https://media.motiontalentafrica.co.ke/'
+    baseUrl = process.env.REACT_APP_MEDIA_URL
 
     constructor(endpoint){
         super(endpoint)

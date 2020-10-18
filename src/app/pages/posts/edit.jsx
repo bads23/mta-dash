@@ -35,7 +35,7 @@ const Edit = ({props}) => {
         btn.innerText = 'Saving...'
         btn.disabled = 'disabled'
 
-        Api.news.put(props.match.params.id)
+        Api.news.put(props.match.params.id, post)
         .then(res => {
             if (cover !== ''){
                 var payload = new FormData()

@@ -24,7 +24,6 @@ const New = ({props}) => {
         var np = {...post}
         np.Content = e.editor.getData()
         setPost(np)
-        console.log(np)
     }
 
     const showImage = (e) => {
@@ -54,15 +53,15 @@ const New = ({props}) => {
                 payload.append('image', image)
 
                 Api.images.post(payload)
-                    .then(res => {
-                        btn.innerText = "Saved!"
-                        btn.disabled = ''
-                    })
-                    .catch(error => {
+                .then(res => {
+                    btn.innerText = "Saved!"
+                    btn.disabled = ''
+                })
+                .catch(error => {
                     btn.disabled = ''
                     console.log(error)
                     setTimeout(() => {
-                        window.location.reload()
+                        window.location.href = ('/posts')
                     }, 2000)
                 })
             }
