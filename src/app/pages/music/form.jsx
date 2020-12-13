@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Link,
-  useRouteMatch,
-  useHistory,
-  useLocation,
-  useParams,
-} from "react-router-dom";
+import { Link, useRouteMatch, useHistory, useParams } from "react-router-dom";
 import _ from "underscore";
 
 import Input, { Select, Checkbox, File, ErrorDiv } from "../../common/inputs";
@@ -20,7 +14,6 @@ const Form = ({ getMusic, styles }) => {
   let { url } = useRouteMatch();
   let history = useHistory();
   let { id } = useParams();
-  let { state } = useLocation();
 
   const handleInput = (e) => {
     setSong({ ...song, [e.target.id]: e.target.value });
@@ -65,18 +58,17 @@ const Form = ({ getMusic, styles }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleBtn("Saving...", 0);
-    {
-      edit
-        ? Api.music.put(id, song).then((res) => {
-            handleBtn("Saved!", 3000);
-            UploadMedia(res.data.id);
-          })
-        : Api.music.post(song).then((res) => {
-            handleBtn("Saved!", 3000);
-            setEdit(true);
-            history.push({ pathname: "/music/edit/" + res.data.id });
-          });
-    }
+
+    edit
+      ? Api.music.put(id, song).then((res) => {
+          handleBtn("Saved!", 3000);
+          UploadMedia(res.data.id);
+        })
+      : Api.music.post(song).then((res) => {
+          handleBtn("Saved!", 3000);
+          setEdit(true);
+          history.push({ pathname: "/music/edit/" + res.data.id });
+        });
   };
 
   const getArtists = () => {

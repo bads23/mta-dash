@@ -138,6 +138,7 @@ export const File = (props) => {
           src={process.env.REACT_APP_MEDIA_URL + props.value}
           width="200px"
           height="200px"
+          alt="music thumbnail"
         />
       ) : (
         ""

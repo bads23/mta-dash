@@ -65,10 +65,4 @@ const Table = ({ music }) => {
   );
 };
 
-const Styles = {
-  table: {
-    width: "calc(100% - 400px)",
-  },
-};
-
 export default Table;
