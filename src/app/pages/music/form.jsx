@@ -47,9 +47,10 @@ const Form = ({ getMusic, styles }) => {
   };
 
   const UploadMedia = () => {
+    handleBtn("Uploading File...", 0);
     _.each(media, (value) => {
       Api.images.post(value).then((res) => {
-        console.log(res.data);
+        handleBtn("File Uploaded!", 2000);
         getSong();
       });
     });
