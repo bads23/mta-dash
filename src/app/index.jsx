@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./sass/main.scss";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import Sidebar from "./common/sidebar";
 
 import Products from "./pages/products";
@@ -22,6 +22,9 @@ class Dashboard extends Component {
 
         <div className="middle">
           <Router>
+            <Route exact path="/">
+              <Redirect to="/products/"></Redirect>
+            </Route>
             <Route path="/products/" component={Products} />
             <Route path="/orders/" component={Orders} />
             <Route path="/users/" component={Users} />
