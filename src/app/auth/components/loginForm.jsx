@@ -7,7 +7,6 @@ const LoginForm = () => {
   const context = useContext(UserContext);
   const [email, setEmail] = useState("stevekaruma@gmail.com");
   const [password, setPassword] = useState("Kazee1233");
-  const [isStaff, setIsStaff] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
